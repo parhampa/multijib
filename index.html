@@ -1,0 +1,169 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>multijib</title>
+	<link rel="stylesheet" href="themes/multijib.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="themes/w3.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" href="lib/fontawesome/web-fonts-with-css/css/fontawesome-all.css">
+	<script src="themes/action.js"></script>
+</head>
+<body style="direction:rtl;" onscroll="mor=morepg(mor);">
+
+	<div data-role="page" data-theme="a" id="loading" class="backload">
+	</div>
+	<div data-role="page" data-theme="a" id="home">
+		<div data-role="header" data-position="fixed" class="headers" data-tap-toggle="false">
+			<span onclick="gotohome();" class="ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button"> Home </span>
+			
+			<span onclick="document.getElementById('ssid').style.display='block';" class="ui-btn-left ui-btn-corner-all ui-icon-search ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button" style="margin-left:50px !important;"> Home </span>
+			<span onclick="refresh();" class="ui-btn-left ui-btn-corner-all ui-icon-refresh ui-btn-icon-notext ui-shadow" data-form="ui-icon" data-role="button" role="button" style="margin-left:100px !important;">  </span>
+			<span onclick="showfave();" class="ui-btn-left ui-btn-corner-all ui-icon-star ui-btn-icon-notext ui-shadow" data-form="ui-icon" data-role="button" role="button" style="margin-left:150px !important;">  </span>
+			<span class="w3-btn w3-red" style="margin-right:50px;" onclick="showact()">رویدادهای من</span>
+			<span onclick="showmenu();" class="ui-btn-right ui-btn-corner-all ui-icon-info ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="button"> Navigation </span>
+			<div class="scrollmenu w3-animate-top" style="direction:rtl;" id="fpmenu">
+			  <span onclick='findvd("+'"'+word+'"'+")' class='w3-btn w3-red'>آخرین جستجوها</span>
+			</div>
+		</div>
+		<div data-role="content" data-theme="a">				
+			<div id="vdlist">
+			</div>
+			<!--<input type="button" value="موارد بیشتر">-->
+		</div>
+		<!--<div data-role="footer" style="text-align:center; width:100%;"  data-position="fixed" data-theme="a" data-tap-toggle="false">
+			<div data-role="navbar" style="width:100%; border-radius:5px;" data-tap-toggle="false">
+				<ul>
+					<li><a href="#" data-icon="ui-icon-grid" style="background-color:#e60000; color:white; border-color:white;">A</a></li>
+					<li><a href="#" data-icon="ui-icon-gear" style="background-color:#e60000; color:white; border-color:white;">C</a></li>
+					<li><a href="#" data-icon="ui-icon-arrow-l" style="background-color:#e60000; color:white; border-color:white;">D</a></li>
+					<li><a href="#" data-icon="ui-icon-arrow-r" style="background-color:#e60000; color:white; border-color:white;">E</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div>
+	</div>
+	
+		<div id="ssid" class="w3-modal">
+			<div class="w3-modal-content w3-animate-top">
+			  <div class="w3-container" style="margin-top:40%;">
+				<span onclick="document.getElementById('ssid').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+				<br>
+				<br>
+				<div style="width:100%; text-align:center;">
+				<input type="text" id="fitxt" placeholder="کلمه کلیدی" maxlength="35" style="padding-right:10px; padding-left:10px; border:1px; border-left-style:none; border-bottom-style:dashed; border-right-style:dashed; border-top-style:dashed; width:90%;height: 38px;font-weight: bold; border-top-right-radius:5px; border-bottom-right-radius:5px;">
+				<button onclick="fitext=document.getElementById('fitxt').value; findvd(fitext);" style="background-color:red; border-style:none; height: 38px; margin-right: -6px; border-top-left-radius:5px; border-bottom-left-radius:5px;"><i class="fas fa-search"></i></button>
+				<br>
+				</div>
+				<p style="font-size:13px;"><b style="font-weight:16px; margin-top:10px;">* </b>جهت جستجوی بهتر تنها کلمه کلیدی مورد نظر خود را وارد نمایید...</p>
+				<br>
+				<br>
+			  </div>
+			</div>
+		</div>
+	
+	<div data-role="page" data-theme="a" id="video">
+		<div data-role="header" data-position="fixed" class="headers">
+			<span onclick="gotohome();" class="ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button"> Home </span>
+			
+			<span onclick="document.getElementById('ssid').style.display='block';" class="ui-btn-left ui-btn-corner-all ui-icon-search ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button" style="margin-left:50px !important;"> Home </span><br><br>
+			
+			<span onclick="showmenu();" class="ui-btn-right ui-btn-corner-all ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="button"> Navigation </span>
+		</div>
+		<div data-role="content" data-theme="a" >
+		<div id="mainvideo"></div>
+		<div id="sharemd" class="w3-modal">
+			<div class="w3-modal-content w3-animate-top">
+			  <div class="w3-container" style="margin-top:40%;">
+				<span onclick="document.getElementById('sharemd').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+				<div style="width:100%; text-align:center; padding-top:20px; color:red; font-size:30px;">
+					<a style="margin-left:1px; margin-right:1px; text-decoration:none;" href="#" id="swhatsapp" target="_blank"><i class="fab fa-whatsapp-square"></i></a>
+					<a style="margin-left:1px; margin-right:1px; text-decoration:none;" href="#" id="stelegram" target="_blank"><i class="fab fa-telegram"></i></a>
+					<a style="margin-left:1px; margin-right:1px; text-decoration:none;" href="#" id="semail" target="_blank"><i class="fas fa-envelope"></i></a>
+					<a style="margin-left:1px; margin-right:1px; text-decoration:none;" href="#"id="ssms" target="_blank"><i class="fas fa-comments"></i></a>
+					<br>
+					<br>
+				</div>
+			  </div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div data-role="page" data-theme="a" id="menu">
+		<div data-role="header" data-position="fixed" class="headers">
+			<span onclick="gotohome();" class="ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button"> Home </span>
+			
+			<span onclick="document.getElementById('ssid').style.display='block';" class="ui-btn-left ui-btn-corner-all ui-icon-search ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button" style="margin-left:50px !important;"> Home </span><br><br>
+			
+			<span onclick="showmenu();" class="ui-btn-right ui-btn-corner-all ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="button"> Navigation </span>
+		</div>
+		<div data-role="content" data-theme="a">
+			<div style="width:100%; direction:rtl;">
+				
+			</div>
+		</div>
+	</div>
+	<div data-role="page" data-theme="a" id="myact">
+		<div data-role="header" data-position="fixed" class="headers">
+			<span onclick="gotohome();" class="ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button"> Home </span>
+			
+			<span onclick="document.getElementById('ssid').style.display='block';" class="ui-btn-left ui-btn-corner-all ui-icon-search ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button" style="margin-left:50px !important;"> Home </span><br><br>
+			
+			<span onclick="showmenu();" class="ui-btn-right ui-btn-corner-all ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="button"> Navigation </span>
+			<div class="scrollmenu w3-animate-top" style="direction:rtl;" id="menulink1">
+			  <span onclick="document.getElementById('pgvd').style.display='none'; document.getElementById('searchpg').style.display='';" class="w3-btn w3-red">آخرین جستجوها</span>
+			  <span onclick="document.getElementById('pgvd').style.display=''; document.getElementById('searchpg').style.display='none';" class="w3-btn w3-red">آخرین مشاهده شده ها</span>
+			  <span onclick="delact();" class="w3-btn w3-red"><i class='far fa-trash-alt'></i></span>
+			</div>
+		</div>
+		<div data-role="content" data-theme="a">
+			<div id="searchpg" class="w3-animate-right">
+			<h3 style="font-size:16px;">
+			آخرین کلمات جستجو شده توسط شما:
+			</h3>
+				<div style="width:100%; direction:rtl;" id="mysearch">
+					
+				</div>
+			</div>
+			<div id="pgvd" style="display:none;" class="w3-animate-right">
+				<h3 style="font-size:16px;">
+				آخرین ویدئوهای مشاهده شده توسط شما :
+				</h3>
+				<div style="width:100%; direction:rtl;" id="myvdlist">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div data-role="page" data-theme="a" id="favepage">
+		<div data-role="header" data-position="fixed" class="headers">
+			<span onclick="gotohome();" class="ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button"> Home </span>
+			
+			<span onclick="document.getElementById('ssid').style.display='block';" class="ui-btn-left ui-btn-corner-all ui-icon-search ui-btn-icon-notext ui-shadow" title="Home" data-form="ui-icon" data-role="button" role="button" style="margin-left:50px !important;"> Home </span><br><br>
+			
+			<span onclick="showmenu();" class="ui-btn-right ui-btn-corner-all ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="button"> Navigation </span>
+		</div>
+		<div data-role="content" data-theme="a">
+			<div id="searchpg" class="w3-animate-right">
+			<h3 style="font-size:16px;">
+			ویدئو های منتخب شما : 
+			</h3>
+				<div style="width:100%; direction:rtl;" id="myfave">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="id01" class="w3-modal" style="text-align:center;">
+    <div class="w3-modal-content" style="text-align:center;">
+      <div class="w3-container" style="text-align:center; margin-top:50%;">
+		<img src="themes/loading.gif" style="width:80%;">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
